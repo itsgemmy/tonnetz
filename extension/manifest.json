@@ -9,7 +9,6 @@
     {
       "matches": ["https://www.youtube.com/watch*"],
       "js": ["content.js"],
-      "css": ["inject.css"],
       "run_at": "document_idle"
     }
   ],
