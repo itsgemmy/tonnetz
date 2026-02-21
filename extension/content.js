@@ -1,12 +1,3 @@
-// after the extension is clicked and it's a Youtube watch page = valid
-// we'll make the service-worker.js trigger content.js here
-// we'll also use Shadow DOM styles ??
-
-// content.js will wait for toggle message from service-worker
-// if on watch page --> create panel; if already there, remote it
-// watces for Youtube's client-side navigations
-//if panel is "open" it reattaches itself on new Watch pages
-
 (() => {
   const HOST_ID = "tonnetz-root-host";
   let isOpen = false; // our curr toggle state
@@ -32,12 +23,6 @@
       document.documentElement.appendChild(host);
 
       const shadow = host.attachShadow({ mode: "open" });
-
-      // external css (or keep styles inline)
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = chrome.runtime.getURL("panel.css");
-      shadow.appendChild(link);
 
       // panel content
       const panel = document.createElement("div");
@@ -105,9 +90,7 @@
   }
 
   function togglePanel() {
-    //only show the panel on /watch. If not, we can either no-op or show a toast.
     if (!onWatchPage()) {
-      // console.log("Tonnetz: open a YouTube video (Watch page) to show the panel.");
       isOpen = false;
       removePanel();
       return;
@@ -122,35 +105,29 @@
     }
   }
 
-  //listen for toolbar clicks (via background message)
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg?.type === "TONNETZ_TOGGLE_PANEL") {
       togglePanel();
     }
   });
 
-  // handling YouTube SPA navigations 
-  //if the user left the panel open, keep it open on subsequent Watch pages.
   function attachNavListeners() {
     const reattachIfNeeded = () => {
-      if (isOpen) { // checking if it's watch page
+      if (isOpen) {
         if (onWatchPage()) ensurePanel();
         else removePanel();
       }
     };
 
     window.addEventListener("yt-navigate-finish", () => {
-      // DOM changes after navigation finish; delay a tick
       setTimeout(reattachIfNeeded, 0);
     });
     window.addEventListener("yt-page-data-updated", () =>
-      setTimeout(reattachIfNeeded, 0)
+      setTimeout(reattachIfNeeded, 0),
     );
 
-    // Fallback observer in case those events don't fire
     const app = document.querySelector("ytd-app") || document.documentElement;
     const mo = new MutationObserver(() => {
-      // This runs a lot — keep work minimal
       if (isOpen) {
         if (onWatchPage() && !document.getElementById(HOST_ID)) ensurePanel();
         if (!onWatchPage() && document.getElementById(HOST_ID)) removePanel();
