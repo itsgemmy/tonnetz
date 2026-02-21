@@ -24,9 +24,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
   min-height: 100vh;
 }
 
@@ -65,4 +67,119 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Upload page */
+.upload-page {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.upload-page header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.upload-page header p {
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.upload-section,
+.youtube-section {
+  margin-bottom: 1.5rem;
+}
+
+.upload-section h2,
+.youtube-section h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone {
+  border: 2px dashed rgba(100, 108, 255, 0.5);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.dropzone:hover,
+.dropzone.active {
+  border-color: #646cff;
+  background: rgba(100, 108, 255, 0.08);
+}
+
+.divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.youtube-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.youtube-input input {
+  flex: 1;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font: inherit;
+}
+
+.upload-page form {
+  margin-top: 2rem;
+}
+
+.upload-page form button {
+  width: 100%;
+}
+
+.upload-page button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Visualization page */
+.visualization-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.visualization-page header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vis-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.vis-placeholder {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 3rem;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.vis-note {
+  opacity: 0.6;
+  font-size: 0.9rem;
 }
