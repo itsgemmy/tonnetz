@@ -1,3 +1,6 @@
 This is tonnetz!! 
 
-I will be mapping songs to their chord orientation on Euler's tonnetz graph
+mapping songs to their chord orientation on Euler's tonnetz graph
+
+1. poc – get songs to recognize chord switches/chord progresions 
+2. make tonnetz
